@@ -1,0 +1,1 @@
+{"version":3,"sources":["frontEnd\\src\\router\\index.js"],"names":["RootRoute","childRoutes"],"mappings":";;;;;;AAAA;;;;;;AAEA,IAAIA,YAAY;AACfC;AADe,CAAhB;kBAGeD,S","file":"index.js","sourceRoot":"D:/webLearning/blog/blog","sourcesContent":["import menuroutedata from './router.js'\r\n\r\nlet RootRoute = {\r\n\tchildRoutes: menuroutedata\r\n}\r\nexport default RootRoute"]}

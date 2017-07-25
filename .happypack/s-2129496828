@@ -1,0 +1,23 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _router = require('./router.js');
+
+var _router2 = _interopRequireDefault(_router);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var RootRoute = {
+	childRoutes: [_router2.default, { path: '*',
+		getComponent: function getComponent(nextState, cb) {
+			require.ensure([], function (require) {
+				cb(null, require('../views/empty'));
+			}, "empty");
+		}
+	}]
+};
+exports.default = RootRoute;
+module.exports = exports['default'];

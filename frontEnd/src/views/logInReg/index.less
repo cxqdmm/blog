@@ -1,0 +1,76 @@
+.log-reg-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    #back-canvas {
+        position: absolute;
+        z-index: -1;
+    }
+    .main-body {
+        margin-top: 200px;
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        .index-tab-nav {
+            position: relative;
+            margin: 20px;
+            padding: 8px;
+            display: flex;
+            justify-content: center;
+
+            .index-nav-bar {
+                font-size: 18px;
+                opacity: .7;
+                &:first-child {  
+                    margin-right: 20px;
+                }
+            }
+            .index-nav-slider {
+                transition: all .2s ease-out;
+                &.slide-step1 {
+                    transform: translateX(57px);
+                }
+                position: absolute;
+                left: 82px;
+                bottom: 0;
+                width: 40px;
+                height: 2px;
+                background: #0f88eb;
+            }
+        }
+        .index-tab-log,
+        .index-tab-reg {
+            .index-table-cont {
+                padding: 1px 0;
+                border: 1px solid #d5d5d5;
+                border-radius: 3px;
+                display: flex;
+                flex-direction: column;
+                .index-tab-input:not(:last-child) {
+                    border-bottom: 1px solid #e7f1f8;
+                }
+            }
+            .index-table-opt {
+                margin-top: 20px;
+                display: flex;
+                flex-direction: column;
+                background: #0f88eb;
+                box-shadow: none;
+                border: 0;
+                border-radius: 3px;
+                line-height: 41px;
+                color: #fff;
+                text-align: center;                
+            }
+        }
+       .index-tab-input {
+          flex: 1;
+          padding: 15px;
+          border: none;
+          background:none;      
+          outline:none;  
+          border:0px;   
+       } 
+    }
+}

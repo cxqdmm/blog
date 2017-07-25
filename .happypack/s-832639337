@@ -1,0 +1,205 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = undefined;
+
+var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
+
+var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _stringify = require('babel-runtime/core-js/json/stringify');
+
+var _stringify2 = _interopRequireDefault(_stringify);
+
+var _typeof2 = require('babel-runtime/helpers/typeof');
+
+var _typeof3 = _interopRequireDefault(_typeof2);
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _axios = require('axios');
+
+var _axios2 = _interopRequireDefault(_axios);
+
+require('./index.less');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function translateParam(param) {
+    if ((typeof param === 'undefined' ? 'undefined' : (0, _typeof3.default)(param)) === 'object') {
+        var newParam = [];
+        for (var key in param) {
+            if (param[key] instanceof Array) {
+                newParam.push(key + '=' + encodeURIComponent((0, _stringify2.default)(param[key])));
+            } else {
+                newParam.push(key + '=' + encodeURIComponent(param[key]));
+            }
+        }
+        return newParam.join('&');
+    }
+
+    return param;
+}
+
+var Center = function (_React$Component) {
+    (0, _inherits3.default)(Center, _React$Component);
+
+    function Center(props) {
+        (0, _classCallCheck3.default)(this, Center);
+
+        var _this = (0, _possibleConstructorReturn3.default)(this, (Center.__proto__ || (0, _getPrototypeOf2.default)(Center)).call(this, props));
+
+        _this.state = {
+            'logIn': true,
+            'reg': false,
+            'name': '',
+            'password': '',
+            'password-repeat': '',
+            'email': ''
+        };
+        return _this;
+    }
+
+    (0, _createClass3.default)(Center, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {}
+    }, {
+        key: '_sendAjax',
+        value: function _sendAjax(url, type, data, params, callBack, errorCallBack) {
+            return (0, _axios2.default)({
+                method: type,
+                url: url,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+                },
+                data: translateParam(data) || {},
+                params: params || {}
+            }).then(function (response) {
+                if (callBack) {
+                    callBack(response.data);
+                }
+            }).catch(function (error) {
+                if (errorCallBack) {
+                    errorCallBack(error);
+                }
+            });
+        }
+    }, {
+        key: 'submit',
+        value: function submit() {
+            var url = '/reg?v=' + new Date().getTime();
+            var data = {
+                'name': this.state.name,
+                'password': this.state.password,
+                'password-repeat': this.state['password-repeat'],
+                'email': this.state.email
+            };
+            this._sendAjax(url, 'post', data, null, function (res) {}, function () {
+                console.log('error');
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this2 = this;
+
+            return _react2.default.createElement(
+                'div',
+                { className: 'log-reg-container' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'main-body' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'index-tab-nav' },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'index-nav-bar', style: { "color": this.state.logIn ? '#0f88eb' : 'initial' }, onClick: function onClick() {
+                                    _this2.state.logIn = true;_this2.state.reg = false;_this2.setState();
+                                } },
+                            '\u767B\u5F55'
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'index-nav-bar', style: { "color": this.state.reg ? '#0f88eb' : 'initial' }, onClick: function onClick() {
+                                    _this2.state.logIn = false;_this2.state.reg = true;_this2.setState();
+                                } },
+                            '\u6CE8\u518C'
+                        ),
+                        _react2.default.createElement('div', { className: 'index-nav-slider ' + (this.state.reg ? 'slide-step1' : '') })
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'index-tab-log', style: { "display": this.state.logIn ? 'initial' : 'none' } },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'index-table-cont' },
+                            _react2.default.createElement('input', { type: 'text', className: 'index-tab-input', name: 'name', onChange: function onChange(e) {
+                                    _this2.state.name = e.target.value;
+                                }, placeholder: '\u7528\u6237\u540D' }),
+                            _react2.default.createElement('input', { type: 'password', className: 'index-tab-input', name: 'password', onChange: function onChange(e) {
+                                    _this2.state.password = e.target.value;
+                                }, placeholder: '\u5BC6\u7801' })
+                        ),
+                        _react2.default.createElement(
+                            'a',
+                            { className: 'index-table-opt ui-btn', href: 'javascript:;', onClick: function onClick() {} },
+                            '\u767B\u5F55'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'index-tab-reg', style: { "display": this.state.reg ? 'initial' : 'none' } },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'index-table-cont' },
+                            _react2.default.createElement('input', { type: 'text', className: 'index-tab-input', name: 'name', onChange: function onChange(e) {
+                                    _this2.state.name = e.target.value;
+                                }, placeholder: '\u7528\u6237\u540D' }),
+                            _react2.default.createElement('input', { type: 'password', className: 'index-tab-input', name: 'password', onChange: function onChange(e) {
+                                    _this2.state.password = e.target.value;
+                                }, placeholder: '\u5BC6\u7801' }),
+                            _react2.default.createElement('input', { type: 'password', className: 'index-tab-input', name: 'password-repeat', onChange: function onChange(e) {
+                                    _this2.state['password-repeat'] = e.target.value;
+                                }, placeholder: '\u786E\u8BA4\u5BC6\u7801' }),
+                            _react2.default.createElement('input', { type: 'email', className: 'index-tab-input', name: 'email', onChange: function onChange(e) {
+                                    _this2.state.email = e.target.value;
+                                }, placeholder: '\u90AE\u7BB1' })
+                        ),
+                        _react2.default.createElement(
+                            'a',
+                            { className: 'index-table-opt ui-btn', href: 'javascript:;', onClick: function onClick() {
+                                    _this2.submit();
+                                } },
+                            '\u63D0\u4EA4'
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+    return Center;
+}(_react2.default.Component);
+
+exports.default = Center;
+module.exports = exports['default'];

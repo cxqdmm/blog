@@ -1,0 +1,28 @@
+'use strict';
+
+var menuRouteDataList = {
+    key: 'root',
+    path: '/',
+    indexRoute: {
+        onEnter: function onEnter(nextState, replace) {
+            return replace('/logInReg');
+        }
+    },
+    component: require('../views/center'),
+    childRoutes: [{
+        path: 'index',
+        getComponent: function getComponent(nextState, cb) {
+            require.ensure([], function (require) {
+                cb(null, require('../views/index'));
+            }, "index");
+        }
+    }, {
+        path: 'logInReg',
+        getComponent: function getComponent(nextState, cb) {
+            require.ensure([], function (require) {
+                cb(null, require('../views/logInReg'));
+            }, "logInReg");
+        }
+    }]
+};
+module.exports = menuRouteDataList;
